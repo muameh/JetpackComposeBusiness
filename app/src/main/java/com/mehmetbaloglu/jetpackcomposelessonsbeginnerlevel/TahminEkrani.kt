@@ -1,9 +1,5 @@
 package com.mehmetbaloglu.jetpackcomposelessonsbeginnerlevel
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -13,10 +9,11 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -28,28 +25,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import com.mehmetbaloglu.jetpackcomposelessonsbeginnerlevel.ui.theme.JetpackComposeLessonsBeginnerLevelTheme
 
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            JetpackComposeLessonsBeginnerLevelTheme {
-                Surface(color = MaterialTheme.colorScheme.background) {
-                    sayfaGecisleri()
-                }
-
-            }
-        }
-    }
-}
 
 @Composable
-fun GirisEkrani(navController: NavController) {
+fun TahminEkranı(navController: NavController) {
+
+    var tahmin = remember { mutableStateOf("") }
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -57,7 +39,7 @@ fun GirisEkrani(navController: NavController) {
         modifier = Modifier.fillMaxSize()
     ) {
         Text(
-            text = "Tahmin Oyunu",
+            text = "Kalan hak : 5 ",
             fontSize = 40.sp,
             fontFamily = FontFamily.Cursive,
             color = Color(0xFF713713),
@@ -65,49 +47,29 @@ fun GirisEkrani(navController: NavController) {
             modifier = Modifier.padding(10.dp),
             fontWeight = FontWeight.Bold
         )
-        Image(
-            painter = painterResource(id = R.drawable.baseline_casino_24),
-            contentDescription = "resim açıklaması buraya"
+        Text(
+            text = "Yardım : Arttır",
+            fontSize = 25.sp,
+            fontFamily = FontFamily.Cursive,
+            fontStyle = FontStyle.Normal,
+            modifier = Modifier.padding(10.dp),
+            fontWeight = FontWeight.Bold
         )
+       TextField(
+           value = tahmin.value, onValueChange = {tahmin.value = it},
+           label = { Text(text = "tahmininiz ?") }
+       )
         Button(
-            onClick = { navController.navigate("tahminEkrani") },
+            onClick = { navController.navigate("sonucEkrani") {popUpTo("tahminEkrani")} },
             colors = ButtonDefaults.buttonColors(Color(0xDD713713)),
             shape = RoundedCornerShape(50.dp),
             modifier = Modifier.size(250.dp, 50.dp)
         ) {
             Text(
-                text = "Oyuna başla", fontSize = 20.sp, color = Color.White
+                text = "TAHMİN ET", fontSize = 20.sp, color = Color.White
             )
         }
     }
 }
-
-@Composable
-fun sayfaGecisleri(){
-    val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = "girisEkrani"){
-        composable("girisEkrani"){
-            GirisEkrani(navController)
-        }
-        composable("tahminEkrani"){
-            TahminEkranı(navController)
-        }
-        composable("sonucEkrani"){
-            SonucEkranı(navController)
-        }
-    }
-
-}
-
-
-
-@Preview(showBackground = true, showSystemUi = true)
-@Composable
-fun DefaultPreview() {
-    JetpackComposeLessonsBeginnerLevelTheme {
-
-    }
-}
-
 
 
