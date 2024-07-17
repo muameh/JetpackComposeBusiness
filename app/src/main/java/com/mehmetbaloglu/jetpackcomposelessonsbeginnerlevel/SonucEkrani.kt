@@ -24,26 +24,45 @@ import androidx.navigation.NavController
 
 
 @Composable
-fun SonucEkranı(navController: NavController) {
+fun SonucEkranı(navController: NavController,gelenSonuc:Boolean) {
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceEvenly,
         modifier = Modifier.fillMaxSize()
     ) {
-        Text(
-            text = "Kazandınız !",
-            fontSize = 40.sp,
-            fontFamily = FontFamily.Cursive,
-            color = Color(0xFF713713),
-            fontStyle = FontStyle.Italic,
-            modifier = Modifier.padding(10.dp),
-            fontWeight = FontWeight.Bold
-        )
-        Image(
-            painter = painterResource(id = R.drawable.baseline_tag_faces_24),
-            contentDescription = "resim açıklaması buraya"
-        )
+
+        if (gelenSonuc == true){
+            Text(
+                text = "Kazandınız !",
+                fontSize = 40.sp,
+                fontFamily = FontFamily.Cursive,
+                color = Color(0xFF713713),
+                fontStyle = FontStyle.Italic,
+                modifier = Modifier.padding(10.dp),
+                fontWeight = FontWeight.Bold
+            )
+            Image(
+                painter = painterResource(id = R.drawable.baseline_tag_faces_24),
+                contentDescription = "resim açıklaması buraya"
+            )
+        } else {
+            Text(
+                text = "Kaybettiniz !",
+                fontSize = 40.sp,
+                fontFamily = FontFamily.Cursive,
+                color = Color(0xFF713713),
+                fontStyle = FontStyle.Italic,
+                modifier = Modifier.padding(10.dp),
+                fontWeight = FontWeight.Bold
+            )
+            Image(
+                painter = painterResource(id = R.drawable.baseline_sentiment_very_dissatisfied_24),
+                contentDescription = "resim açıklaması buraya",
+                modifier = Modifier.size(200.dp)
+            )
+        }
+
 
     }
 }

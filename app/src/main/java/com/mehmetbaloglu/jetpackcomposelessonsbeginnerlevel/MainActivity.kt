@@ -28,9 +28,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.mehmetbaloglu.jetpackcomposelessonsbeginnerlevel.ui.theme.JetpackComposeLessonsBeginnerLevelTheme
 
 class MainActivity : ComponentActivity() {
@@ -92,8 +94,10 @@ fun sayfaGecisleri(){
         composable("tahminEkrani"){
             TahminEkranı(navController)
         }
-        composable("sonucEkrani"){
-            SonucEkranı(navController)
+        composable("sonucEkrani/{sonuc}",
+            arguments = listOf(navArgument("sonuc"){type = NavType.BoolType})){
+            var sonuc = it.arguments?.getBoolean("sonuc")
+            SonucEkranı(navController, gelenSonuc = sonuc!!)
         }
     }
 
