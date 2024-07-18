@@ -48,7 +48,7 @@ fun SonucEkranı(navController: NavController,gelenSonuc:Boolean) {
             )
         } else {
             Text(
-                text = "Kaybettiniz !",
+                text = "Kaybettiniz!",
                 fontSize = 40.sp,
                 fontFamily = FontFamily.Cursive,
                 color = Color(0xFF713713),

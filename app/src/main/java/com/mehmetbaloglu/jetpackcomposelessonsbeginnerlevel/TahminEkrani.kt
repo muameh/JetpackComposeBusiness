@@ -68,12 +68,15 @@ fun TahminEkranı(navController: NavController) {
             label = { Text(text = "tahmininiz ?") })
         Button(
             onClick = {
-
                 kalanHak.value--
                 val tahminInt = tahmin.value.toInt()
 
                 if (tahminInt == rastgeleSayi.value) {
-                    navController.navigate("sonucEkrani/true") { popUpTo("tahminEkrani"){inclusive = true} }
+                    navController.navigate("sonucEkrani/true") {
+                        popUpTo("tahminEkrani") {
+                            inclusive = true
+                        }
+                    }
                     return@Button
                 }
 
@@ -82,16 +85,21 @@ fun TahminEkranı(navController: NavController) {
                 }
 
                 if (tahminInt < rastgeleSayi.value) {
-                    yonlendirme.value = "Arttır"}
+                    yonlendirme.value = "Arttır"
+                }
 
                 if (kalanHak.value == 0) {
-                    navController.navigate("sonucEkrani/false") { popUpTo("tahminEkrani"){inclusive = true} }
+                    navController.navigate("sonucEkrani/false") {
+                        popUpTo("tahminEkrani") {
+                            inclusive = true
+                        }
+                    }
                 }
 
                 tahmin.value = ""
 
 
-                      },
+            },
             colors = ButtonDefaults.buttonColors(Color(0xDD713713)),
             shape = RoundedCornerShape(50.dp),
             modifier = Modifier.size(250.dp, 50.dp)

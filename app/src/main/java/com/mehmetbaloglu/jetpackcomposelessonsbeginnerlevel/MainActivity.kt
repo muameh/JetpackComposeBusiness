@@ -87,6 +87,7 @@ fun GirisEkrani(navController: NavController) {
 @Composable
 fun sayfaGecisleri(){
     val navController = rememberNavController()
+
     NavHost(navController = navController, startDestination = "girisEkrani"){
         composable("girisEkrani"){
             GirisEkrani(navController)
@@ -95,7 +96,8 @@ fun sayfaGecisleri(){
             TahminEkranı(navController)
         }
         composable("sonucEkrani/{sonuc}",
-            arguments = listOf(navArgument("sonuc"){type = NavType.BoolType})){
+            arguments = listOf(navArgument("sonuc"){type = NavType.BoolType})
+        ){
             var sonuc = it.arguments?.getBoolean("sonuc")
             SonucEkranı(navController, gelenSonuc = sonuc!!)
         }
